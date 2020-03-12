@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<!-- <script>
+    let requestlist = [1, 2, 3, 4, 5, 6, 7,8,9];
+    //每个tabBar的返回数据使用reslist装起来
+    let reslist = [];
+    function startapi() {
+        //定义counts，用来收集请求的次数，（也可以用reslist的length进行判断）
+        let counts = 0;
+     
+        return function apirequest() {
+                let arg = arguments[0]
+                console.log(arg,'argarg')
+                let a = new Promise((res, rej) => {
+                    //setTimeout模拟请求到接收的时间需要5秒钟
+                    setTimeout(function () {
+                        res('成功返回数据');
+                        
+                    },1000)
+                })
+                
+                //无论成功或者失败都要进行下一次，以免阻塞，成功请求的末尾有s标志，失败的末尾有f标志
+                a.then(() => {
+                 counts++;
+                    if (counts > requestlist.length) {
+                        return;
+                    }
+                    console.log(counts)
+                    //1，假设当前请求出错的时候我们认为这不合法，假设此时counts为3
+                    if(counts==3){
+                    throw new Error('第三个失败')
+                    }
+                    //2,假设当前请求下没有数据的时候我们认为不合法 ，假设此时counts为4
+                    if(counts==4){
+                    
+                     reslist.push(arg + 'f');
+                    }
+                    if(counts!=4){
+                    reslist.push(arg + 's');
+                    }
+                    
+                    apirequest(requestlist[counts])
+                    console.log(reslist)
+                }).catch(err => {
+                
+                
+                reslist.push(arg + 'f');
+               //递归调用
+                apirequest(requestlist[counts])
+                    console.log(err)
+                })
+        }
+
+    }
+    let newapiget = startapi();
+
+    newapiget(requestlist[0])
+</script> -->
+
+<script>
+    const stack = new Stack()
+    console.log(stack,'stack')
+    function type(obj) {
+  var toString = Object.prototype.toString;
+  var map = {
+    '[object Boolean]' : 'boolean', 
+    '[object Number]'  : 'number', 
+    '[object String]'  : 'string', 
+    '[object Function]' : 'function', 
+    '[object Array]'  : 'array', 
+    '[object Date]'   : 'date', 
+    '[object RegExp]'  : 'regExp', 
+    '[object Undefined]': 'undefined',
+    '[object Null]'   : 'null', 
+    '[object Object]'  : 'object'
+  };
+  return map[toString.call(obj)];
+}
+    function deepClone(data) {
+  var t = type(data), o, i, ni;
+  
+  if(t === 'array') {
+    o = [];
+  }else if( t === 'object') {
+    o = {};
+  }else {
+    return data;
+  }
+  
+  if(t === 'array') {
+    for (i = 0, ni = data.length; i < ni; i++) {
+      o.push(deepClone(data[i]));
+    }
+    return o;
+  }else if( t === 'object') {
+    for( i in data) {
+      o[i] = deepClone(data[i]);
+    }
+    return o;
+  }
+}
+
+var obj = {
+    a:{
+        b:undefined
+    }
+}
+obj.a.b = obj.a
+
+console.log(obj,'obj')
+
+const newObj = deepClone(obj)
+console.log(newObj,'newObj')
+
+</script>
+</html>
