@@ -6,8 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-    
+
 </body>
+123
 <!-- <script>
     let requestlist = [1, 2, 3, 4, 5, 6, 7,8,9];
     //每个tabBar的返回数据使用reslist装起来
@@ -23,10 +24,10 @@
                     //setTimeout模拟请求到接收的时间需要5秒钟
                     setTimeout(function () {
                         res('成功返回数据');
-                        
+
                     },1000)
                 })
-                
+
                 //无论成功或者失败都要进行下一次，以免阻塞，成功请求的末尾有s标志，失败的末尾有f标志
                 a.then(() => {
                  counts++;
@@ -40,7 +41,7 @@
                     }
                     //2,假设当前请求下没有数据的时候我们认为不合法 ，假设此时counts为4
                     if(counts==4){
-                    
+
                      reslist.push(arg + 'f');
                     }
                     if(counts!=4){
@@ -52,8 +53,8 @@
                     apirequest(requestlist[counts])
                     console.log(reslist)
                 }).catch(err => {
-                
-                
+
+
                 reslist.push(arg + 'f');
                //递归调用
                 apirequest(requestlist[counts])
@@ -73,22 +74,22 @@
     function type(obj) {
   var toString = Object.prototype.toString;
   var map = {
-    '[object Boolean]' : 'boolean', 
-    '[object Number]'  : 'number', 
-    '[object String]'  : 'string', 
-    '[object Function]' : 'function', 
-    '[object Array]'  : 'array', 
-    '[object Date]'   : 'date', 
-    '[object RegExp]'  : 'regExp', 
+    '[object Boolean]' : 'boolean',
+    '[object Number]'  : 'number',
+    '[object String]'  : 'string',
+    '[object Function]' : 'function',
+    '[object Array]'  : 'array',
+    '[object Date]'   : 'date',
+    '[object RegExp]'  : 'regExp',
     '[object Undefined]': 'undefined',
-    '[object Null]'   : 'null', 
+    '[object Null]'   : 'null',
     '[object Object]'  : 'object'
   };
   return map[toString.call(obj)];
 }
     function deepClone(data) {
   var t = type(data), o, i, ni;
-  
+
   if(t === 'array') {
     o = [];
   }else if( t === 'object') {
@@ -96,7 +97,7 @@
   }else {
     return data;
   }
-  
+
   if(t === 'array') {
     for (i = 0, ni = data.length; i < ni; i++) {
       o.push(deepClone(data[i]));
